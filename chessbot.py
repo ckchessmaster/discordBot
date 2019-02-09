@@ -26,7 +26,8 @@ client = Bot(command_prefix=BOT_PREFIX)
         pass_context=True)
 @commands.has_any_role('Mod', 'Admin', 'Supreme Overlord')
 async def createGroup(context, groupName):
-    await client.create_role(context.message.author.server, name=groupName)    
+    #perms = discord.Permissions(mentionable=True)
+    await client.create_role(context.message.author.server, name=groupName, mentionable=True)    
     await client.send_message(context.message.channel, 'Group created!')
 
 @client.command(
@@ -35,6 +36,7 @@ async def createGroup(context, groupName):
         aliases=['joingroup', 'JouGroup', 'jg', 'join_group'],
         pass_context=True)
 async def joinGroup(context, groupName):
+    
     user = context.message.author
     role = discord.utils.get(user.server.roles, name=groupName)
     await client.add_roles(user, role)
